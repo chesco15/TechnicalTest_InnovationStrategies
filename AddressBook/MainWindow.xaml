@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:AddressBook"
         xmlns:views="clr-namespace:AddressBook.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    
-    <views:ContactsView/>
+        Title="Addres Book" Height="450" Width="800">
+
+    <views:AddressBookView/>
     
     
 </Window>

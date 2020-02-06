@@ -16,7 +16,7 @@ namespace AddressBook.Models
         private string _num;
         #endregion
 
-        #region [Properties]
+        #region [Propiedades]
         
         /// Nombre del cliente
         public string Name { 

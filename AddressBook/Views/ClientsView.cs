@@ -12,9 +12,7 @@ using System.Windows.Input;
 
 namespace AddressBook.Views
 {
-    /// <summary>
     /// Controla la lógica de la aplicación respecto a las operaciones con contactos
-    /// </summary>
     public class ClientsView : INotifyPropertyChanged
     {
 
@@ -28,10 +26,8 @@ namespace AddressBook.Views
         private ICommand listCommand;
         #endregion
 
-        #region [Properties]
-        /// <summary>
+        #region [Propieades]
         /// Almacena los contactos resultantes de las diferentes consultas
-        /// </summary>
         public ObservableCollection<Clients> SearchedContacts
         {
             get { return this.searchedContacts; }
@@ -45,9 +41,7 @@ namespace AddressBook.Views
             }
         }
 
-        /// <summary>
         /// Almacena la ciudad por la que se va a buscar en una consulta
-        /// </summary>
         public string SearchCity
         {
             get { return this.searchCity; }
@@ -61,10 +55,7 @@ namespace AddressBook.Views
             }
         }
 
-
-        /// <summary>
         /// Mensaje de control para mostrar errores o avisos
-        /// </summary>
         public string ControlMessage
         {
             get { return this.controlMessage; }
@@ -79,10 +70,8 @@ namespace AddressBook.Views
         }
         #endregion
 
-        #region [Constructors]
-        /// <summary>
+        #region [Constructores]
         /// Constructor de la clase ContactsViewModel
-        /// </summary>
         public ClientsView()
         {
             ClientsBD.InitializeClientsDB();
@@ -94,15 +83,11 @@ namespace AddressBook.Views
         
         #endregion
 
-        #region [Events]
-        /// <summary>
-        /// Manejador de eventos para propiedades de la clase
-        /// </summary>
+        #region [Eventos]
+        /// Controlador de eventos para propiedades de la clase
         public event PropertyChangedEventHandler PropertyChanged;
 
-        /// <summary>
         /// Función que lanza la notificación al resto de la aplicación de que una propiedad ha cambiado su valor
-        /// </summary>
         /// <param name="propertyName">Nombre de la propiedad</param>
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -113,42 +98,38 @@ namespace AddressBook.Views
         }
         #endregion
 
-        #region [Methods]
-        /// <summary>
+        #region [Metodos]
         /// Comando para ejecutar una función de búsqueda
-        /// </summary>
         public ICommand SearchCommand
         {
             get { return searchCommand; }
             set { searchCommand = value; }
         }
 
-        /// <summary>
         /// Comando para ejecutar una función de listado
-        /// </summary>
         public ICommand ListCommand
         {
             get { return listCommand; }
             set { listCommand = value; }
         }
 
-        /// <summary>
-        /// Función para buscar contactos en la base de datos
-        /// </summary>
+        /// Función para buscar contactos en la base de datos, con control de errores
         private void SearchContacts()
         {
-            if (ClientsBD.DictionaryClients.ContainsKey(SearchCity))
+
+            if (SearchCity == null)
             {
-                ControlMessage = "";
-                SearchedContacts = new ObservableCollection<Clients>(ClientsBD.DictionaryClients[SearchCity]);
+                
+                ControlMessage = " Por favor, introduzca una ciudad existente.";
+                
             }
+            else if (ClientsBD.DictionaryClients.ContainsKey(SearchCity))
+                SearchedContacts = new ObservableCollection<Clients>(ClientsBD.DictionaryClients[SearchCity]);
             else
-                ControlMessage = "There's no one that lives in that city";
+                ControlMessage = " No se encuentra ningun cliente con esa ciudad.";
         }
 
-        /// <summary>
         /// Función para listar los contactos de la base de datos
-        /// </summary>
         private void ListContacts()
         {
             SearchedContacts = new ObservableCollection<Clients>(ClientsBD.Clients);

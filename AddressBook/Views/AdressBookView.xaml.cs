@@ -16,12 +16,10 @@ using System.Windows.Shapes;
 
 namespace AddressBook.Views
 {
-    /// <summary>
-    /// Lógica de interacción para ContactsView.xaml
-    /// </summary>
-    public partial class ContactsView : Page
+    /// Lógica de interacción para AdressBookView.xaml
+    public partial class AddressBookView : Page
     {
-        public ContactsView()
+        public AddressBookView()
         {
 
             ClientsView clientsVM = new ClientsView();
